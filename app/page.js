@@ -4,6 +4,7 @@ import { Check, ChevronRight, Star, Phone, Mail } from "lucide-react";
 import { Reveal } from "../components/reveal";
 import { GoldButton } from "../components/gold-button";
 import { GalleryGrid } from "../components/gallery-lightbox";
+import { PreFooterCta } from "../components/pre-footer-cta";
 import HomeHero from "../components/page-sections/home-hero";
 
 export default function Home() {
@@ -675,80 +676,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6.10 Pre-Footer CTA */}
-      <section className="relative py-32 md:py-40 flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
-            alt="Farmhouse at twilight"
-            fill
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-black/70" />
-        </div>
-        <div className="absolute inset-0 stars-bg opacity-40 pointer-events-none z-0" />
-        <Reveal>
-          <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
-            <div className="flex items-center justify-center gap-3 mb-8">
-              <div className="w-12 h-[1px] bg-gold/40" />
-              <Star className="w-4 h-4 text-gold fill-gold" />
-              <div className="w-12 h-[1px] bg-gold/40" />
-            </div>
-            <p className="text-gold uppercase tracking-[0.4em] text-xs font-semibold mb-6">
-              Your Escape Awaits
-            </p>
-            <h2 className="font-display text-4xl sm:text-6xl md:text-7xl text-white mb-6 leading-tight">
-              Ready for an{" "}
-              <span className="italic gold-gradient">Unforgettable</span>{" "}
-              Experience?
-            </h2>
-            <p className="text-white/50 text-base md:text-lg max-w-2xl mx-auto mb-12">
-              Whether it&apos;s a family weekend, a milestone celebration, or a
-              corporate retreat — create memories that last a lifetime at Black
-              Gold Farmhouse.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <GoldButton
-                href="/book-now"
-                variant="fill"
-                beam
-                className="min-w-[220px] shadow-[0_15px_40px_-15px_rgba(200,160,80,0.4)]"
-              >
-                Book Your Stay
-              </GoldButton>
-              <GoldButton
-                href="/contact"
-                variant="outline"
-                className="min-w-[220px]"
-              >
-                Contact Us
-              </GoldButton>
-            </div>
-            <div className="flex flex-wrap items-center justify-center gap-8 mt-16 pt-8 border-t border-white/10">
-              <div className="text-center">
-                <p className="font-display text-2xl text-gold">500+</p>
-                <p className="text-white/40 text-xs uppercase tracking-wider">
-                  Happy Families
-                </p>
-              </div>
-              <div className="w-[1px] h-8 bg-white/10 hidden sm:block" />
-              <div className="text-center">
-                <p className="font-display text-2xl text-gold">5.0</p>
-                <p className="text-white/40 text-xs uppercase tracking-wider">
-                  Google Rating
-                </p>
-              </div>
-              <div className="w-[1px] h-8 bg-white/10 hidden sm:block" />
-              <div className="text-center">
-                <p className="font-display text-2xl text-gold">24/7</p>
-                <p className="text-white/40 text-xs uppercase tracking-wider">
-                  Concierge
-                </p>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-      </section>
+      {/* 6.10 Pre-Footer CTA Component */}
+      <PreFooterCta />
     </div>
   );
 }

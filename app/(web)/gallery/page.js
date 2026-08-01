@@ -1,9 +1,7 @@
-import Image from "next/image";
-import Link from "next/link";
-import { ChevronRight } from "lucide-react";
 import { Reveal } from "../../../components/reveal";
-import { GoldButton } from "../../../components/gold-button";
-import { GalleryGrid } from "../../../components/gallery-lightbox";
+import { PageHero } from "../../../components/page-hero";
+import { PreFooterCta } from "../../../components/pre-footer-cta";
+import { GalleryWithFilterClient } from "./gallery-client";
 
 /**
  * Gallery page metadata — SEO optimized
@@ -133,59 +131,20 @@ const GALLERY_IMAGES = [
 ];
 
 /**
- * GalleryPage — Luxury photo gallery with:
- *  - Hero banner with parallax background
- *  - Category filter tabs
- *  - Masonry-style grid with lightbox
- *  - Bottom CTA section
+ * GalleryPage — Luxury photo gallery using reusable PageHero and PreFooterCta components.
  */
 export default function GalleryPage() {
   return (
     <div className="min-h-screen">
-      {/* ── Hero Banner ──────────────────────────────────────────── */}
-      <section className="relative h-[50vh] md:h-[60vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
-            alt="Black Gold Farmhouse gallery hero"
-            fill
-            priority
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-black/60" />
-        </div>
-
-        {/* Stars overlay */}
-        <div className="absolute inset-0 stars-bg opacity-30 pointer-events-none z-0" />
-
-        <Reveal>
-          <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
-            {/* Breadcrumb */}
-            <nav className="flex items-center justify-center text-xs text-white/50 uppercase tracking-widest mb-8">
-              <Link
-                href="/"
-                className="hover:text-gold transition-colors"
-              >
-                Home
-              </Link>
-              <ChevronRight className="w-3 h-3 mx-2" />
-              <span className="text-gold">Gallery</span>
-            </nav>
-
-            {/* Decorative line */}
-            <div className="w-12 h-[1px] bg-gold mx-auto mb-6 opacity-60" />
-
-            <h1 className="font-display text-5xl sm:text-6xl md:text-7xl text-white mb-6 leading-tight">
-              Photo{" "}
-              <span className="italic gold-gradient">Gallery</span>
-            </h1>
-            <p className="text-white/60 text-base md:text-lg max-w-xl mx-auto">
-              Explore every corner of our luxury estate — from the sparkling
-              pool to the elegant interiors and lush garden landscapes.
-            </p>
-          </div>
-        </Reveal>
-      </section>
+      {/* ── Reusable Hero Banner ─────────────────────────────────── */}
+      <PageHero
+        title="Photo"
+        highlightTitle="Gallery"
+        description="Explore every corner of our luxury estate — from the sparkling pool to the elegant interiors and lush garden landscapes."
+        breadcrumbText="Gallery"
+        bgImage="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
+        bgAlt="Black Gold Farmhouse photo gallery"
+      />
 
       {/* ── Gallery Section with Category Filters ────────────────── */}
       <section className="py-20 md:py-28 bg-background relative">
@@ -193,80 +152,28 @@ export default function GalleryPage() {
         <div className="absolute inset-0 aurora-bg opacity-[0.02] dark:opacity-[0.06] pointer-events-none z-0" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Category filter + image count */}
           <Reveal>
-            <GalleryWithFilter
+            <GalleryWithFilterClient
               categories={GALLERY_CATEGORIES}
-              images={GALLERY_IMAGES}
+              allImages={GALLERY_IMAGES}
             />
           </Reveal>
         </div>
       </section>
 
-      {/* ── Bottom CTA ───────────────────────────────────────────── */}
-      <section className="relative py-24 md:py-32 overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
-            alt="Farmhouse at twilight"
-            fill
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-black/70" />
-        </div>
-        <div className="absolute inset-0 stars-bg opacity-30 pointer-events-none z-0" />
-
-        <Reveal>
-          <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
-            <p className="text-gold uppercase tracking-[0.4em] text-xs font-semibold mb-6">
-              Love What You See?
-            </p>
-            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-white mb-6 leading-tight">
-              Experience It{" "}
-              <span className="italic gold-gradient">In Person</span>
-            </h2>
-            <p className="text-white/50 text-base max-w-lg mx-auto mb-10">
-              Pictures only tell half the story. Book your stay and discover
-              every breathtaking detail of Black Gold Farmhouse firsthand.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <GoldButton
-                href="/book-now"
-                variant="fill"
-                beam
-                className="min-w-[200px]"
-              >
-                Book Your Stay
-              </GoldButton>
-              <GoldButton
-                href="/contact"
-                variant="outline"
-                className="min-w-[200px]"
-              >
-                Contact Us
-              </GoldButton>
-            </div>
-          </div>
-        </Reveal>
-      </section>
+      {/* ── Reusable Pre-Footer CTA ──────────────────────────────── */}
+      <PreFooterCta
+        tag="Love What You See?"
+        title="Experience It"
+        highlightTitle="In Person"
+        titleAfter=""
+        description="Pictures only tell half the story. Book your stay and discover every breathtaking detail of Black Gold Farmhouse firsthand."
+        primaryCtaLabel="Book Your Stay"
+        primaryCtaHref="/book-now"
+        secondaryCtaLabel="Contact Us"
+        secondaryCtaHref="/contact"
+        bgImage="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
+      />
     </div>
-  );
-}
-
-/* ════════════════════════════════════════════════════════════════════
- * Client Component — Gallery with category filter tabs
- * ════════════════════════════════════════════════════════════════ */
-import { GalleryWithFilterClient } from "./gallery-client";
-
-/**
- * Server wrapper that passes data to the client filter component.
- * Keeps the page as a Server Component for SEO/metadata.
- */
-function GalleryWithFilter({ categories, images }) {
-  return (
-    <GalleryWithFilterClient
-      categories={categories}
-      allImages={images}
-    />
   );
 }
