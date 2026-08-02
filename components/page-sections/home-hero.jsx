@@ -28,8 +28,8 @@ const SLIDES = [
     line2: "Meets Family Fun",
     sub: "Escape to Karachi's most exclusive retreat. Discover unparalleled privacy, world-class amenities, and unforgettable moments.",
     cta: { label: "Book Your Stay", href: "/book-now" },
-    img: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=90",
-    alt: "Black Gold Farmhouse luxury pool at dusk",
+    img: "/images/7.jpeg",
+    alt: "Black Gold Farmhouse big adult pool with shade canopy and clear blue water",
   },
   {
     id: 2,
@@ -39,8 +39,8 @@ const SLIDES = [
     line2: "That Last Forever",
     sub: "From intimate family gatherings to grand celebrations — every event here is a masterpiece of luxury and unforgettable joy.",
     cta: { label: "Explore Packages", href: "/packages" },
-    img: "https://images.unsplash.com/photo-1510798831971-661eb04b3739?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=90",
-    alt: "Black Gold Farmhouse estate at golden sunset",
+    img: "/images/18.jpeg",
+    alt: "Black Gold Farmhouse illuminated pergola lounge with Sufi artwork and charpais",
   },
   {
     id: 3,
@@ -50,9 +50,8 @@ const SLIDES = [
     line2: "The City's Hustle",
     sub: "Step into a world of calm and comfort, just minutes from Karachi. Lush green lawns, world-class amenities, and 24/7 service.",
     cta: { label: "View Gallery", href: "/gallery" },
-    /* Replaced broken URL with a working luxury resort image */
-    img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=90",
-    alt: "Black Gold Farmhouse panoramic landscape view",
+    img: "/images/21.jpeg",
+    alt: "Black Gold Farmhouse panoramic daylight view of lawn and pool",
   },
 ];
 

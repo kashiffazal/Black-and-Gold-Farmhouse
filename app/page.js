@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Check, ChevronRight, Star, Phone, Mail } from "lucide-react";
+import { Check, ChevronRight, Star, Phone, Mail, Play, Film } from "lucide-react";
 import { Reveal } from "../components/reveal";
 import { GoldButton } from "../components/gold-button";
 import { GalleryGrid } from "../components/gallery-lightbox";
@@ -32,8 +32,8 @@ export default function Home() {
                 {/* Main image */}
                 <div className="relative z-10 aspect-[4/5] w-full overflow-hidden rounded-md shadow-2xl">
                   <Image
-                    src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                    alt="Black Gold Farmhouse luxury exterior"
+                    src="/images/9.jpeg"
+                    alt="Black Gold Farmhouse luxury exterior estate view"
                     fill
                     className="object-cover slow-pan"
                   />
@@ -52,8 +52,8 @@ export default function Home() {
                 {/* Small secondary image */}
                 <div className="hidden md:block absolute -top-6 -right-10 w-36 h-44 rounded-md overflow-hidden shadow-xl border-2 border-background z-20">
                   <Image
-                    src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
-                    alt="Farmhouse garden detail"
+                    src="/images/14.jpeg"
+                    alt="Black Gold Farmhouse lawn and palms"
                     fill
                     className="object-cover"
                   />
@@ -81,17 +81,15 @@ export default function Home() {
                 <div className="w-16 h-[2px] bg-gradient-to-r from-gold to-gold-deep mb-8" />
 
                 <p className="text-foreground/70 text-base leading-relaxed mb-6">
-                  Nestled just 15 minutes away from the bustling city, Black
-                  Gold Farmhouse stands as a testament to luxury and
-                  tranquility. We've meticulously designed every inch of our
-                  estate to provide families and corporate guests an oasis of
-                  unparalleled comfort.
+                  Nestled just 15 minutes away from the airport, Black Gold
+                  Farmhouse stands as Karachi&apos;s premier luxury retreat. We have
+                  meticulously designed every inch of our estate to provide
+                  families an oasis of privacy, luxury, and unmatched entertainment.
                 </p>
                 <p className="text-foreground/70 text-base leading-relaxed mb-10">
-                  Whether you're looking to host an intimate gathering, a grand
-                  celebration, or simply seeking a weekend of pure relaxation,
-                  our dedicated staff and world-class facilities ensure your
-                  experience is nothing short of extraordinary.
+                  Whether you are seeking a 10-hour daytime splash picnic, a 22-hour
+                  overnight weekend getaway, or a grand evening event, our estate
+                  features 2 AC bedrooms, big adult & kids pool with slides, indoor snooker lounge, live BBQ pit, and heavy generator power backup.
                 </p>
 
                 {/* Stats row */}
@@ -105,7 +103,7 @@ export default function Home() {
                   <div className="text-center lg:text-left">
                     <p className="font-display text-3xl text-gold mb-1">24/7</p>
                     <p className="text-xs text-foreground/50 uppercase tracking-wider">
-                      Concierge Service
+                      Concierge Support
                     </p>
                   </div>
                   <div className="text-center lg:text-left">
@@ -121,16 +119,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6.4 Cinematic Banner — Professional fullscreen statement */}
+      {/* 6.4 Cinematic Banner — Updated with Golden Hour Flare Background */}
       <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
-            alt="Luxury farmhouse at golden hour"
+            src="/images/16.jpeg"
+            alt="Black Gold Farmhouse estate lawn at golden hour"
             fill
             className="object-cover slow-pan"
           />
-          <div className="absolute inset-0 bg-black/55"></div>
+          <div className="absolute inset-0 bg-black/60"></div>
         </div>
         <Reveal>
           <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
@@ -156,7 +154,7 @@ export default function Home() {
         </Reveal>
       </section>
 
-      {/* 6.5 Featured Experiences — Family-focused */}
+      {/* 6.5 Featured Experiences — Linked to /experience page */}
       <section className="py-28 md:py-36 bg-muted relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
@@ -184,43 +182,52 @@ export default function Home() {
             {[
               {
                 num: "01",
-                title: "Swimming Pool & Jacuzzi",
-                desc: "Crystal-clear infinity pool with heated jacuzzi for the whole family.",
-                img: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                title: "Adult & Kids Pool",
+                desc: "Big adult pool (3.5-5.75 ft depth) & kids splash pool with water slides.",
+                img: "/images/7.jpeg",
+                href: "/experience#aquatic",
               },
               {
                 num: "02",
-                title: "Outdoor Lounge",
-                desc: "Lush garden seating under twinkling lights — perfect for evening chai.",
-                img: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                title: "Outdoor Pergola Lounge",
+                desc: "2-3 outdoor pergolas with traditional charpais under ambient purple lighting.",
+                img: "/images/18.jpeg",
+                href: "/experience#culinary",
               },
               {
                 num: "03",
-                title: "Luxury Accommodation",
-                desc: "Spacious en-suite bedrooms with premium linens and modern amenities.",
-                img: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                title: "Luxury AC Suites",
+                desc: "Spacious AC bedrooms with velvet upholstered headboard walls & attached baths.",
+                img: "/images/11.jpeg",
+                href: "/experience#suites",
               },
               {
                 num: "04",
-                title: "Bonfire Courtyard",
-                desc: "Gather the family for marshmallows and stories under starlit skies.",
-                img: "https://images.unsplash.com/photo-1475483768296-6163e08872a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                title: "Kids Play Area",
+                desc: "Swings, slides, merry-go-round, see-saw & colorful hand-painted cartoon murals.",
+                img: "/images/12.jpeg",
+                href: "/experience#gaming",
               },
               {
                 num: "05",
-                title: "Indoor Snooker",
-                desc: "Professional-grade snooker table in our air-conditioned game room.",
-                img: "https://images.unsplash.com/photo-1627257060697-acfbecf5d9a2?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                title: "Indoor Snooker Lounge",
+                desc: "Full-size professional snooker table in an air-conditioned indoor game room.",
+                img: "/images/4.jpeg",
+                href: "/experience#gaming",
               },
               {
                 num: "06",
-                title: "BBQ & Dining",
-                desc: "Open-air BBQ pit with covered dining for grand family feasts.",
-                img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                title: "Live BBQ Pit & Kitchen",
+                desc: "Dedicated BBQ grill station, stove & deep freezer for family feasts.",
+                img: "/images/5.jpeg",
+                href: "/experience#culinary",
               },
             ].map((exp, idx) => (
               <Reveal key={idx} delay={idx * 100}>
-                <div className="group relative h-[400px] overflow-hidden rounded-md cursor-pointer border border-border/50 bg-card hover:border-gold/50 transition-all duration-500 shadow-md hover:shadow-2xl hover:-translate-y-2">
+                <Link
+                  href={exp.href}
+                  className="group relative h-[400px] overflow-hidden rounded-md block cursor-pointer border border-border/50 bg-card hover:border-gold/50 transition-all duration-500 shadow-md hover:shadow-2xl hover:-translate-y-2"
+                >
                   <div className="absolute inset-0 z-0">
                     <Image
                       src={exp.img}
@@ -240,11 +247,11 @@ export default function Home() {
                     <p className="text-white/60 text-sm mb-3 max-w-xs opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-500 delay-100">
                       {exp.desc}
                     </p>
-                    <div className="flex items-center text-gold text-sm tracking-widest uppercase opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-500 delay-150">
-                      Learn More <ChevronRight className="w-4 h-4 ml-1" />
+                    <div className="flex items-center text-gold text-sm tracking-widest uppercase opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-500 delay-150 font-semibold">
+                      Explore Experience <ChevronRight className="w-4 h-4 ml-1" />
                     </div>
                   </div>
-                </div>
+                </Link>
               </Reveal>
             ))}
           </div>
@@ -302,18 +309,6 @@ export default function Home() {
                 name: "Usman & Fatima",
                 event: "Weekend Getaway",
               },
-              {
-                quote:
-                  "We celebrated our anniversary here. The bonfire and catering were world class.",
-                name: "Ali Raza",
-                event: "Anniversary",
-              },
-              {
-                quote:
-                  "Best corporate retreat we've ever organized. The team loved every minute.",
-                name: "Ayesha Khan",
-                event: "Corporate Event",
-              },
             ].map((t, idx) => (
               <div
                 key={idx}
@@ -345,10 +340,10 @@ export default function Home() {
           <Reveal>
             <div className="text-center mb-20">
               <p className="text-gold uppercase tracking-[0.4em] text-xs font-semibold mb-6">
-                Exclusive Offers
+                Official Rate List (April - July 2026)
               </p>
               <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-foreground">
-                Tailored For You
+                Featured Packages
               </h2>
             </div>
           </Reveal>
@@ -356,40 +351,35 @@ export default function Home() {
             <Reveal delay={0}>
               <div className="bg-card border border-border p-8 rounded-md shadow-sm aura-box">
                 <h3 className="font-display text-2xl text-card-foreground mb-2">
-                  Intimate Escape
+                  10 Hours Weekday
                 </h3>
-                <p className="text-card-foreground/60 text-sm mb-6">
-                  Up to 20 guests
+                <p className="text-card-foreground/60 text-xs uppercase tracking-wider mb-6">
+                  Mon - Thu (8 AM - 6 PM or 8 PM - 6 AM)
                 </p>
                 <div className="mb-8">
-                  <span className="text-3xl font-display text-foreground">
-                    PKR 425,000
+                  <span className="text-3xl font-display text-gold">
+                    Rs. 35,000/-
                   </span>
-                  <span className="text-card-foreground/50 text-sm">
-                    {" "}
-                    / night
+                  <span className="text-card-foreground/50 text-xs block mt-1">
+                    Morning Slot (Night Slot: Rs. 45,000)
                   </span>
                 </div>
                 <ul className="space-y-4 mb-8 text-sm text-card-foreground/80">
                   <li className="flex items-start">
-                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" /> Full
-                    access to main villa
+                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" /> 10 Hours exclusive estate access
                   </li>
                   <li className="flex items-start">
-                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" />{" "}
-                    Private pool & jacuzzi
+                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" /> Adult & Kids Pool with slides
                   </li>
                   <li className="flex items-start">
-                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" /> Basic
-                    decor & setup
+                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" /> Snooker, Carrom & Foosball
                   </li>
                   <li className="flex items-start">
-                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" />{" "}
-                    Standard catering (optional)
+                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" /> Max 5 Hours AC timing
                   </li>
                 </ul>
-                <GoldButton variant="outline" size="full">
-                  Reserve Package
+                <GoldButton href="/packages" variant="outline" size="full">
+                  View All Rates
                 </GoldButton>
               </div>
             </Reveal>
@@ -399,79 +389,73 @@ export default function Home() {
                   Most Popular
                 </div>
                 <h3 className="font-display text-3xl text-white mb-2 mt-4">
-                  Signature Farmhouse
+                  22 Hours Weekend
                 </h3>
-                <p className="text-white/60 text-sm mb-6">Up to 40 guests</p>
+                <p className="text-white/60 text-xs uppercase tracking-wider mb-6">
+                  Fri - Sun & Public Holidays (2 PM - 12 PM)
+                </p>
                 <div className="mb-8">
                   <span className="text-4xl font-display text-gold">
-                    PKR 625,000
+                    Rs. 110,000/-
                   </span>
-                  <span className="text-white/50 text-sm"> / night</span>
+                  <span className="text-white/50 text-xs block mt-1">
+                    Overnight / Full Day Stay
+                  </span>
                 </div>
                 <ul className="space-y-4 mb-8 text-sm text-white/80">
                   <li className="flex items-start">
-                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" /> Entire
-                    estate access
+                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" /> Full 22 Hours weekend exclusive access
                   </li>
                   <li className="flex items-start">
-                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" /> Pool,
-                    Jacuzzi, Game Rooms
+                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" /> 2 AC Bedrooms & Royal Lounge
                   </li>
                   <li className="flex items-start">
-                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" />{" "}
-                    Premium BBQ Setup
+                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" /> Adult & Kids Pool with slides
                   </li>
                   <li className="flex items-start">
-                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" />{" "}
-                    Dedicated concierge
+                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" /> Snooker, Carrom, Foosball & Kids Play
                   </li>
                   <li className="flex items-start">
-                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" />{" "}
-                    Welcome drinks & snacks
+                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" /> Fuel & Heavy Generator Included
                   </li>
                 </ul>
-                <GoldButton variant="fill" size="full">
-                  Reserve Package
+                <GoldButton href="/book-now?package=22h-weekend" variant="fill" size="full">
+                  Book Weekend Stay
                 </GoldButton>
               </div>
             </Reveal>
             <Reveal delay={400}>
               <div className="bg-card border border-border p-8 rounded-md shadow-sm aura-box">
                 <h3 className="font-display text-2xl text-card-foreground mb-2">
-                  Celebration Suite
+                  22 Hours Weekday
                 </h3>
-                <p className="text-card-foreground/60 text-sm mb-6">
-                  Weddings & 60+ guests
+                <p className="text-card-foreground/60 text-xs uppercase tracking-wider mb-6">
+                  Mon - Thu (2 PM - 12 PM)
                 </p>
                 <div className="mb-8">
-                  <span className="text-3xl font-display text-foreground">
-                    PKR 895,000
+                  <span className="text-3xl font-display text-gold">
+                    Rs. 85,000/-
                   </span>
-                  <span className="text-card-foreground/50 text-sm">
-                    {" "}
-                    / night
+                  <span className="text-card-foreground/50 text-xs block mt-1">
+                    Overnight Weekday Getaway
                   </span>
                 </div>
                 <ul className="space-y-4 mb-8 text-sm text-card-foreground/80">
                   <li className="flex items-start">
-                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" /> Event
-                    lawn access
+                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" /> Full 22 Hours exclusive access
                   </li>
                   <li className="flex items-start">
-                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" /> Valet
-                    parking service
+                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" /> 2 AC Bedrooms with attached baths
                   </li>
                   <li className="flex items-start">
-                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" /> Custom
-                    stage & lighting
+                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" /> 10 Hours Max AC timing
                   </li>
                   <li className="flex items-start">
-                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" />{" "}
-                    Extensive catering support
+                    <Check className="w-5 h-5 text-gold mr-3 shrink-0" /> BBQ Pit, Lawn & Pergolas
                   </li>
                 </ul>
-                <GoldButton variant="outline" size="full">
-                  Reserve Package
+                <GoldButton href="/book-now?package=22h-weekday" variant="outline" size="full">
+                  Book Weekday Stay
                 </GoldButton>
               </div>
             </Reveal>
@@ -479,42 +463,119 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6.8 Booking CTA — Redesigned with image panel */}
-      <section className="relative py-20 md:py-28 overflow-hidden bg-muted">
-        <div className="absolute inset-0 stars-bg opacity-10 dark:opacity-20 pointer-events-none z-0" />
+      {/* 6.8 Video Reel Showcase Section */}
+      <section className="py-24 bg-muted border-y border-border relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <Reveal>
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+              <div>
+                <p className="text-gold uppercase tracking-[0.4em] text-xs font-semibold mb-3 flex items-center gap-2">
+                  <Film className="w-4 h-4 text-gold" /> Estate Video Highlights
+                </p>
+                <h2 className="font-display text-4xl sm:text-5xl text-foreground">
+                  Experience Black Gold in Motion
+                </h2>
+                <p className="text-foreground/60 mt-3 text-sm max-w-md">
+                  Watch authentic video walkthroughs of our swimming pool, snooker lounge, and lawns.
+                </p>
+              </div>
+              <Link
+                href="/gallery"
+                className="text-gold text-sm tracking-wider uppercase font-semibold flex items-center hover:text-gold-soft transition-colors"
+              >
+                View Full Video Gallery <ChevronRight className="w-4 h-4 ml-1" />
+              </Link>
+            </div>
+          </Reveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                title: "Pool & Wall Fountain Ambiance",
+                desc: "Night illuminated pool reflection and wall fountain",
+                video: "/videos/v2.mp4",
+              },
+              {
+                title: "Expansive Green Lawns & Facade",
+                desc: "Daylight estate walkthrough & palm trees",
+                video: "/videos/v3.mp4",
+              },
+              {
+                title: "AC Snooker & Games Lounge",
+                desc: "Indoor snooker table and gaming atmosphere",
+                video: "/videos/v5.mp4",
+              },
+            ].map((v, idx) => (
+              <Reveal key={idx} delay={idx * 150}>
+                <div className="bg-card border border-border rounded-lg overflow-hidden shadow-lg group aura-box">
+                  <div className="relative aspect-[16/10] bg-black">
+                    <video
+                      src={v.video}
+                      controls
+                      preload="metadata"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <h4 className="font-display text-lg text-foreground mb-1">
+                      {v.title}
+                    </h4>
+                    <p className="text-foreground/60 text-xs">{v.desc}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6.9 Booking CTA — Redesigned with Authentic Background Image Overlay */}
+      <section className="relative py-20 md:py-28 overflow-hidden bg-background">
+        {/* Background Image Overlay */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/10.jpeg"
+            alt="Black Gold Farmhouse night illuminated arches"
+            fill
+            className="object-cover opacity-15"
+          />
+          <div className="absolute inset-0 bg-background/85 backdrop-blur-sm" />
+        </div>
+
         <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <Reveal>
-            <div className="bg-card border border-border/50 rounded-lg shadow-2xl overflow-hidden">
+            <div className="bg-card border border-border/60 rounded-lg shadow-2xl overflow-hidden aura-box">
               <div className="grid grid-cols-1 lg:grid-cols-5">
                 {/* Left image panel */}
                 <div className="hidden lg:block lg:col-span-2 relative min-h-[600px]">
                   <Image
-                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                    alt="Farmhouse pool"
+                    src="/images/1.jpeg"
+                    alt="Black Gold Farmhouse luxury pool at night"
                     fill
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-card/80" />
-                  <div className="absolute bottom-8 left-8 right-8 bg-black/60 backdrop-blur-md p-6 rounded-md">
-                    <p className="text-gold text-xs uppercase tracking-widest mb-2">
-                      Why Book With Us?
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-card/90" />
+                  <div className="absolute bottom-8 left-8 right-8 bg-black/70 backdrop-blur-md p-6 rounded-md border border-white/10">
+                    <p className="text-gold text-xs uppercase tracking-widest mb-3 font-semibold">
+                      Why Choose Black Gold?
                     </p>
                     <ul className="space-y-2 text-white/80 text-sm">
                       <li className="flex items-center">
-                        <Check className="w-4 h-4 text-gold mr-2 shrink-0" />{" "}
-                        Private estate, no shared spaces
+                        <Check className="w-4 h-4 text-gold mr-2 shrink-0" /> 100% Private Exclusive Estate
                       </li>
                       <li className="flex items-center">
-                        <Check className="w-4 h-4 text-gold mr-2 shrink-0" />{" "}
-                        Dedicated concierge team
+                        <Check className="w-4 h-4 text-gold mr-2 shrink-0" /> Big Adult & Kids Pool with Slides
                       </li>
                       <li className="flex items-center">
-                        <Check className="w-4 h-4 text-gold mr-2 shrink-0" />{" "}
-                        Flexible cancellation policy
+                        <Check className="w-4 h-4 text-gold mr-2 shrink-0" /> AC Bedrooms & Heavy Generator
+                      </li>
+                      <li className="flex items-center">
+                        <Check className="w-4 h-4 text-gold mr-2 shrink-0" /> 24/7 Dedicated Concierge
                       </li>
                     </ul>
                   </div>
                 </div>
+
                 {/* Right form panel */}
                 <div className="lg:col-span-3 p-8 md:p-12 lg:p-16">
                   <p className="text-gold uppercase tracking-[0.4em] text-xs font-semibold mb-4">
@@ -524,9 +585,9 @@ export default function Home() {
                     Book Your Retreat
                   </h2>
                   <p className="text-foreground/60 mb-8 text-sm md:text-base max-w-lg">
-                    Fill in the details below and our concierge team will reach
-                    out within 24 hours to tailor the perfect experience.
+                    Fill in the details below and our team will reach out within 2 hours to confirm date availability.
                   </p>
+
                   <div className="flex flex-wrap gap-6 mb-8 pb-8 border-b border-border">
                     <div className="flex items-center">
                       <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center text-gold mr-3">
@@ -534,10 +595,10 @@ export default function Home() {
                       </div>
                       <div>
                         <p className="text-xs text-foreground/50 uppercase tracking-wider">
-                          Call
+                          Call / WhatsApp
                         </p>
                         <p className="text-foreground font-semibold text-sm">
-                          +92 300 123 4567
+                          +92 333 2973045
                         </p>
                       </div>
                     </div>
@@ -555,24 +616,24 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
+
                   <form
-                    action="mailto:info@blackgoldfarmhouse.com"
-                    method="post"
-                    encType="text/plain"
+                    action="https://wa.me/923332973045"
+                    target="_blank"
                     className="space-y-4"
                   >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <input
                         type="text"
                         name="Name"
-                        placeholder="Full Name"
+                        placeholder="Full Name *"
                         required
                         className="w-full bg-background border border-border rounded-md py-3 px-4 text-sm focus:outline-none focus:border-gold transition-colors text-foreground"
                       />
                       <input
                         type="text"
                         name="Phone"
-                        placeholder="Phone Number"
+                        placeholder="Phone Number *"
                         required
                         className="w-full bg-background border border-border rounded-md py-3 px-4 text-sm focus:outline-none focus:border-gold transition-colors text-foreground"
                       />
@@ -589,15 +650,15 @@ export default function Home() {
                         className="w-full bg-background border border-border rounded-md py-3 px-4 text-sm focus:outline-none focus:border-gold transition-colors text-foreground appearance-none min-w-0"
                       >
                         <option value="">Number of Guests</option>
-                        <option value="1-10">1-10 Guests</option>
-                        <option value="11-20">11-20 Guests</option>
-                        <option value="21-40">21-40 Guests</option>
-                        <option value="40+">40+ Guests</option>
+                        <option value="1-15">1-15 Guests</option>
+                        <option value="16-35">16-35 Guests (Standard)</option>
+                        <option value="36-45">36-45 Guests (+Rs. 1,000/pax)</option>
+                        <option value="45+">45+ Guests (Event Booking)</option>
                       </select>
                     </div>
                     <textarea
                       name="Message"
-                      placeholder="Tell us about your occasion — birthday, reunion, corporate retreat?"
+                      placeholder="Tell us about your occasion — family picnic, overnight stay, or grand event?"
                       rows="3"
                       className="w-full bg-background border border-border rounded-md py-3 px-4 text-sm focus:outline-none focus:border-gold transition-colors text-foreground"
                     ></textarea>
@@ -607,7 +668,7 @@ export default function Home() {
                       size="full"
                       className="mt-2"
                     >
-                      Submit Request
+                      Submit Reservation Request
                     </GoldButton>
                   </form>
                 </div>
@@ -617,28 +678,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6.9 Gallery Section — With lightbox */}
+      {/* 6.10 Photo & Video Gallery Preview Section — Authentic Media */}
       <section className="py-28 md:py-36 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
               <div>
                 <p className="text-gold uppercase tracking-[0.4em] text-xs font-semibold mb-4">
-                  Glimpses
+                  Glimpses of Luxury
                 </p>
                 <h2 className="font-display text-4xl sm:text-5xl text-foreground">
-                  Photo Gallery
+                  Photo & Video Gallery
                 </h2>
                 <p className="text-foreground/60 mt-3 text-sm max-w-md">
-                  Click any image to view in full screen with our interactive
-                  lightbox.
+                  Click any image or video to view in full screen with our interactive lightbox player.
                 </p>
               </div>
               <Link
                 href="/gallery"
                 className="text-gold text-sm tracking-wider uppercase font-semibold flex items-center hover:text-gold-soft transition-colors"
               >
-                View All Images <ChevronRight className="w-4 h-4 ml-1" />
+                View Full Gallery <ChevronRight className="w-4 h-4 ml-1" />
               </Link>
             </div>
           </Reveal>
@@ -646,29 +706,34 @@ export default function Home() {
             <GalleryGrid
               images={[
                 {
-                  src: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-                  alt: "Farmhouse exterior with lush garden",
+                  src: "/images/1.jpeg",
+                  alt: "Illuminated swimming pool at night with wall fountain reflection",
+                  category: "Pool & Water",
+                  type: "image",
+                },
+                {
+                  src: "/videos/v1.mp4",
+                  alt: "Black Gold Farmhouse Estate Video Walkthrough",
+                  category: "Estate Video Reel",
+                  type: "video",
+                },
+                {
+                  src: "/images/9.jpeg",
+                  alt: "Expansive green lawn and main estate architecture",
                   category: "Exterior",
+                  type: "image",
                 },
                 {
-                  src: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-                  alt: "Luxury living room interior",
-                  category: "Interior",
+                  src: "/images/4.jpeg",
+                  alt: "Air-conditioned indoor games room with snooker table",
+                  category: "Indoor Games",
+                  type: "image",
                 },
                 {
-                  src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-                  alt: "Garden seating area at dusk",
-                  category: "Garden",
-                },
-                {
-                  src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-                  alt: "Pool area with lounge chairs",
-                  category: "Pool",
-                },
-                {
-                  src: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-                  alt: "Outdoor dining under the stars",
-                  category: "Dining",
+                  src: "/images/11.jpeg",
+                  alt: "Luxurious AC bedroom suite with velvet headboard",
+                  category: "Suites",
+                  type: "image",
                 },
               ]}
             />
@@ -676,8 +741,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6.10 Pre-Footer CTA Component */}
-      <PreFooterCta />
+      {/* 6.11 Pre-Footer CTA Component with Authentic Background Image */}
+      <PreFooterCta bgImage="/images/1.jpeg" />
     </div>
   );
 }

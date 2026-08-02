@@ -7,155 +7,256 @@ import { GalleryWithFilterClient } from "./gallery-client";
  * Gallery page metadata — SEO optimized
  */
 export const metadata = {
-  title: "Photo Gallery — Black Gold Farmhouse",
+  title: "Photos & Videos Gallery — Black Gold Farmhouse",
   description:
-    "Explore our luxury farmhouse estate through stunning photography. Pool, garden, interiors, dining & event spaces at Black Gold Farmhouse, Karachi.",
+    "Explore authentic high-resolution photos and video tours of Black Gold Farmhouse: adult & kids pool, snooker room, large lawns, pergolas, AC bedrooms, and ambient night lighting.",
 };
 
 /* ────────────────────────────────────────────────────────────────────
- * Gallery Data — organized by category for filtering
- * Each image has: src, alt, category
+ * Real Gallery Data — Photos from site-sample/images & Videos from site-sample/videos
  * ────────────────────────────────────────────────────────────────── */
 const GALLERY_CATEGORIES = [
   "All",
-  "Exterior",
-  "Pool",
-  "Interior",
-  "Garden",
-  "Dining",
-  "Events",
+  "Photos 📸",
+  "Videos 🎥",
+  "Pool & Water",
+  "Exterior & Lawns",
+  "Indoor Games & Snooker",
+  "Luxury Suites & Interior",
+  "Night Ambient & Pergola",
 ];
 
-const GALLERY_IMAGES = [
-  // ── Exterior ────────────────────────────────────────────────────
+const GALLERY_ITEMS = [
+  // ── Authentic Videos ─────────────────────────────────────────────
   {
-    src: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-    alt: "Farmhouse main entrance with landscaped lawn",
-    category: "Exterior",
+    src: "/videos/v1.mp4",
+    alt: "Black Gold Farmhouse — Estate Tour & Night Ambient Video",
+    category: "Night Ambient & Pergola",
+    type: "video",
   },
   {
-    src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    alt: "Farmhouse facade at golden hour",
-    category: "Exterior",
+    src: "/videos/v2.mp4",
+    alt: "Illuminated Swimming Pool & Wall Fountain Video Tour",
+    category: "Pool & Water",
+    type: "video",
   },
   {
-    src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    alt: "Estate aerial view with pool and gardens",
-    category: "Exterior",
-  },
-
-  // ── Pool ────────────────────────────────────────────────────────
-  {
-    src: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-    alt: "Crystal-clear infinity pool at sunset",
-    category: "Pool",
+    src: "/videos/v3.mp4",
+    alt: "Expansive Green Lawns & Landscape Walkthrough",
+    category: "Exterior & Lawns",
+    type: "video",
   },
   {
-    src: "https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    alt: "Heated jacuzzi with ambient lighting",
-    category: "Pool",
+    src: "/videos/v4.mp4",
+    alt: "Kids Play Area & Water Slides Reel",
+    category: "Pool & Water",
+    type: "video",
   },
   {
-    src: "https://images.unsplash.com/photo-1572331165267-854da2b021b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    alt: "Poolside lounge chairs and umbrellas",
-    category: "Pool",
-  },
-
-  // ── Interior ────────────────────────────────────────────────────
-  {
-    src: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-    alt: "Luxury living room with designer furniture",
-    category: "Interior",
+    src: "/videos/v5.mp4",
+    alt: "Indoor AC Snooker Lounge & Games Room Video",
+    category: "Indoor Games & Snooker",
+    type: "video",
   },
   {
-    src: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    alt: "Premium master bedroom suite",
-    category: "Interior",
+    src: "/videos/v6.mp4",
+    alt: "Luxurious AC Bedroom Suites & Royal Lounge Tour",
+    category: "Luxury Suites & Interior",
+    type: "video",
   },
   {
-    src: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    alt: "Modern lounge area with art gallery wall",
-    category: "Interior",
-  },
-
-  // ── Garden ──────────────────────────────────────────────────────
-  {
-    src: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-    alt: "Manicured garden pathways with lighting",
-    category: "Garden",
+    src: "/videos/v7.mp4",
+    alt: "Covered Outdoor Games Area (Carrom & Foosball) Reel",
+    category: "Indoor Games & Snooker",
+    type: "video",
   },
   {
-    src: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    alt: "Tropical garden seating area",
-    category: "Garden",
+    src: "/videos/v8.mp4",
+    alt: "Live BBQ Pit & Pergola Sitting Ambiance Video",
+    category: "Night Ambient & Pergola",
+    type: "video",
   },
   {
-    src: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    alt: "Lush green lawn for family activities",
-    category: "Garden",
+    src: "/videos/v9.mp4",
+    alt: "Golden Hour Lawn View & Estate Architectural Highlights",
+    category: "Exterior & Lawns",
+    type: "video",
+  },
+  {
+    src: "/videos/v10.mp4",
+    alt: "Full Black Gold Farmhouse Daytime Highlights Reel",
+    category: "Exterior & Lawns",
+    type: "video",
   },
 
-  // ── Dining ──────────────────────────────────────────────────────
+  // ── Pool & Water Photos ──────────────────────────────────────────
   {
-    src: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-    alt: "Open-air BBQ and grill station",
-    category: "Dining",
+    src: "/images/1.jpeg",
+    alt: "Illuminated swimming pool at night with ambient lighting & fountain reflection",
+    category: "Pool & Water",
+    type: "image",
   },
   {
-    src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    alt: "Fine dining table setup with gold accents",
-    category: "Dining",
+    src: "/images/7.jpeg",
+    alt: "Big adult swimming pool with covered shade canopy & blue water",
+    category: "Pool & Water",
+    type: "image",
   },
   {
-    src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    alt: "Outdoor covered dining pavilion",
-    category: "Dining",
+    src: "/images/3.jpeg",
+    alt: "Poolside Miami lounge chairs with custom tree wall mural",
+    category: "Pool & Water",
+    type: "image",
   },
 
-  // ── Events ──────────────────────────────────────────────────────
+  // ── Exterior & Lawns Photos ──────────────────────────────────────
   {
-    src: "https://images.unsplash.com/photo-1475483768296-6163e08872a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-    alt: "Family bonfire night with fairy lights",
-    category: "Events",
+    src: "/images/9.jpeg",
+    alt: "Expansive lush green lawn & garden area with estate facade view",
+    category: "Exterior & Lawns",
+    type: "image",
   },
   {
-    src: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    alt: "Grand event tent with premium decor",
-    category: "Events",
+    src: "/images/21.jpeg",
+    alt: "Panoramic daylight view of the main estate lawn & kids play area",
+    category: "Exterior & Lawns",
+    type: "image",
   },
   {
-    src: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    alt: "Wedding reception stage setup",
-    category: "Events",
+    src: "/images/14.jpeg",
+    alt: "Manicured green lawn with palm trees & estate view",
+    category: "Exterior & Lawns",
+    type: "image",
+  },
+  {
+    src: "/images/15.jpeg",
+    alt: "Wide-angle lawn view for grand events & family picnics",
+    category: "Exterior & Lawns",
+    type: "image",
+  },
+  {
+    src: "/images/16.jpeg",
+    alt: "Golden hour sunlight across Black Gold Farmhouse estate lawn",
+    category: "Exterior & Lawns",
+    type: "image",
+  },
+  {
+    src: "/images/23.jpeg",
+    alt: "Illuminated metallic BG logo wall feature at the estate entrance",
+    category: "Exterior & Lawns",
+    type: "image",
+  },
+
+  // ── Indoor Games & Snooker Photos ────────────────────────────────
+  {
+    src: "/images/4.jpeg",
+    alt: "Air-conditioned indoor games room with full-size professional snooker table",
+    category: "Indoor Games & Snooker",
+    type: "image",
+  },
+  {
+    src: "/images/5.jpeg",
+    alt: "Covered outdoor games lounge with Carrom Board, Foosball table & charpais",
+    category: "Indoor Games & Snooker",
+    type: "image",
+  },
+  {
+    src: "/images/12.jpeg",
+    alt: "Kids play area with swings, slides, merry-go-round, see-saw & colorful mural wall",
+    category: "Indoor Games & Snooker",
+    type: "image",
+  },
+
+  // ── Luxury Suites & Interior Photos ──────────────────────────────
+  {
+    src: "/images/11.jpeg",
+    alt: "Luxurious AC bedroom suite with velvet geometric headboard wall & gold trims",
+    category: "Luxury Suites & Interior",
+    type: "image",
+  },
+  {
+    src: "/images/8.jpeg",
+    alt: "Royal indoor sitting area with carved golden armchairs & marble wall panel",
+    category: "Luxury Suites & Interior",
+    type: "image",
+  },
+  {
+    src: "/images/20.jpeg",
+    alt: "High-angle view of the royal gold chair lounge with wood slat accent wall",
+    category: "Luxury Suites & Interior",
+    type: "image",
+  },
+  {
+    src: "/images/13.jpeg",
+    alt: "Tufted velvet armchairs with gold coffee table & marble accent wall",
+    category: "Luxury Suites & Interior",
+    type: "image",
+  },
+  {
+    src: "/images/22.jpeg",
+    alt: "Cozy interior lounge corner with luxury tufted seating",
+    category: "Luxury Suites & Interior",
+    type: "image",
+  },
+
+  // ── Night Ambient & Pergola Photos ───────────────────────────────
+  {
+    src: "/images/2.jpeg",
+    alt: "Pergola outdoor sitting area with Sufi wall painting & purple ambient lights",
+    category: "Night Ambient & Pergola",
+    type: "image",
+  },
+  {
+    src: "/images/18.jpeg",
+    alt: "Evening view of the pergola lounge with traditional charpais & mood lights",
+    category: "Night Ambient & Pergola",
+    type: "image",
+  },
+  {
+    src: "/images/10.jpeg",
+    alt: "Night entrance arches illuminated with warm yellow & purple neon lights",
+    category: "Night Ambient & Pergola",
+    type: "image",
+  },
+  {
+    src: "/images/19.jpeg",
+    alt: "Moonlit night view of the estate entrance archway and lounge",
+    category: "Night Ambient & Pergola",
+    type: "image",
+  },
+  {
+    src: "/images/17.jpeg",
+    alt: "Roof canopy structure with solar power panel ceiling & ambient light fixtures",
+    category: "Night Ambient & Pergola",
+    type: "image",
   },
 ];
 
 /**
- * GalleryPage — Luxury photo gallery using reusable PageHero and PreFooterCta components.
+ * GalleryPage — Photos & Videos Gallery using authentic Black Gold Farmhouse media.
  */
 export default function GalleryPage() {
   return (
     <div className="min-h-screen">
       {/* ── Reusable Hero Banner ─────────────────────────────────── */}
       <PageHero
-        title="Photo"
+        title="Photos & Videos"
         highlightTitle="Gallery"
-        description="Explore every corner of our luxury estate — from the sparkling pool to the elegant interiors and lush garden landscapes."
+        description="Explore authentic photos and video tours of Black Gold Farmhouse — featuring our swimming pools, snooker lounge, sprawling lawns, and luxury AC suites."
         breadcrumbText="Gallery"
-        bgImage="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
-        bgAlt="Black Gold Farmhouse photo gallery"
+        bgImage="/images/9.jpeg"
+        bgAlt="Black Gold Farmhouse authentic estate view"
       />
 
-      {/* ── Gallery Section with Category Filters ────────────────── */}
+      {/* ── Gallery Section with Category & Media Filters ────────── */}
       <section className="py-20 md:py-28 bg-background relative">
-        {/* Subtle aurora bg */}
         <div className="absolute inset-0 aurora-bg opacity-[0.02] dark:opacity-[0.06] pointer-events-none z-0" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <Reveal>
             <GalleryWithFilterClient
               categories={GALLERY_CATEGORIES}
-              allImages={GALLERY_IMAGES}
+              allImages={GALLERY_ITEMS}
             />
           </Reveal>
         </div>
@@ -167,12 +268,12 @@ export default function GalleryPage() {
         title="Experience It"
         highlightTitle="In Person"
         titleAfter=""
-        description="Pictures only tell half the story. Book your stay and discover every breathtaking detail of Black Gold Farmhouse firsthand."
+        description="Pictures and videos only tell half the story. Book your stay and discover every breathtaking detail of Black Gold Farmhouse firsthand."
         primaryCtaLabel="Book Your Stay"
         primaryCtaHref="/book-now"
         secondaryCtaLabel="Contact Us"
         secondaryCtaHref="/contact"
-        bgImage="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
+        bgImage="/images/1.jpeg"
       />
     </div>
   );

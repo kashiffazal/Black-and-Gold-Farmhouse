@@ -5,20 +5,21 @@ import { Reveal } from "./reveal";
 import { GoldButton } from "./gold-button";
 
 /**
- * PreFooterCta — Reusable luxury pre-footer CTA section for use across all site pages.
+ * PreFooterCta — Reusable luxury pre-footer CTA section with background video.
  *
  * Props:
- * - tag: Small uppercase category text (e.g. "Your Escape Awaits" or "Love What You See?")
- * - title: Heading main text (e.g. "Ready for an")
- * - highlightTitle: Highlighted italic gold gradient word (e.g. "Unforgettable")
- * - titleAfter: Optional text after highlighted word (e.g. "Experience?")
+ * - tag: Small uppercase category text
+ * - title: Heading main text
+ * - highlightTitle: Highlighted italic gold gradient word
+ * - titleAfter: Optional text after highlighted word
  * - description: Subtitle description paragraph
  * - primaryCtaLabel: Primary button text
  * - primaryCtaHref: Primary button link URL
  * - secondaryCtaLabel: Secondary button text
  * - secondaryCtaHref: Secondary button link URL
- * - bgImage: Background image URL
- * - showTrustBadges: Boolean to show the 500+ Families / 5.0 Rating / 24/7 Concierge row
+ * - bgImage: Background image fallback
+ * - bgVideo: Background video path (default: /videos/v10.mp4, muted, loop, autoplay)
+ * - showTrustBadges: Boolean to show trust stats row
  */
 export function PreFooterCta({
   tag = "Your Escape Awaits",
@@ -30,19 +31,31 @@ export function PreFooterCta({
   primaryCtaHref = "/book-now",
   secondaryCtaLabel = "Contact Us",
   secondaryCtaHref = "/contact",
-  bgImage = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80",
+  bgImage = "/images/1.jpeg",
+  bgVideo = "/videos/v10.mp4",
   showTrustBadges = true,
 }) {
   return (
     <section className="relative py-28 md:py-36 flex items-center justify-center overflow-hidden border-t border-border/40">
-      {/* Background Image with Dark Overlay */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src={bgImage}
-          alt="Black Gold Farmhouse estate at dusk"
-          fill
-          className="object-cover"
-        />
+      {/* Background Video (v10.mp4 without audio) & Dark Overlay */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {bgVideo ? (
+          <video
+            src={bgVideo}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover scale-105"
+          />
+        ) : (
+          <Image
+            src={bgImage}
+            alt="Black Gold Farmhouse estate background"
+            fill
+            className="object-cover"
+          />
+        )}
         <div className="absolute inset-0 bg-black/75 z-10" />
       </div>
 
@@ -58,72 +71,69 @@ export function PreFooterCta({
             <div className="w-12 h-[1px] bg-gold/40" />
           </div>
 
-          {/* Subtitle Tag */}
-          {tag && (
-            <p className="text-gold uppercase tracking-[0.4em] text-xs font-semibold mb-4">
-              {tag}
-            </p>
-          )}
+          {/* Small Category Tag */}
+          <p className="text-gold uppercase tracking-[0.4em] text-xs font-semibold mb-6">
+            {tag}
+          </p>
 
-          {/* Main Headline */}
-          <h2 className="font-display text-4xl sm:text-6xl md:text-7xl text-white mb-6 leading-tight">
-            {title && <span>{title} </span>}
-            {highlightTitle && (
-              <span className="italic gold-gradient">{highlightTitle}</span>
-            )}
-            {titleAfter && <span> {titleAfter}</span>}
+          {/* Main Title with Highlight Word */}
+          <h2 className="font-display text-4xl sm:text-6xl md:text-7xl text-white leading-tight mb-6">
+            {title}{" "}
+            <span className="italic gold-gradient font-light">
+              {highlightTitle}
+            </span>{" "}
+            {titleAfter}
           </h2>
 
-          {/* Paragraph Description */}
-          {description && (
-            <p className="text-white/60 text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-              {description}
-            </p>
-          )}
+          {/* Description */}
+          <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+            {description}
+          </p>
 
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            {primaryCtaLabel && primaryCtaHref && (
-              <GoldButton
-                href={primaryCtaHref}
-                variant="fill"
-                beam
-                className="min-w-[220px] shadow-[0_15px_40px_-15px_rgba(200,160,80,0.4)]"
-              >
-                {primaryCtaLabel}
-              </GoldButton>
-            )}
-            {secondaryCtaLabel && secondaryCtaHref && (
-              <GoldButton
-                href={secondaryCtaHref}
-                variant="outline"
-                className="min-w-[220px]"
-              >
-                {secondaryCtaLabel}
-              </GoldButton>
-            )}
+          {/* Dual Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+            <GoldButton
+              href={primaryCtaHref}
+              variant="fill"
+              beam={true}
+              className="w-full sm:w-auto px-8 py-4"
+            >
+              {primaryCtaLabel}
+            </GoldButton>
+
+            <GoldButton
+              href={secondaryCtaHref}
+              variant="outline"
+              className="w-full sm:w-auto px-8 py-4"
+            >
+              {secondaryCtaLabel}
+            </GoldButton>
           </div>
 
-          {/* Trust Badges */}
+          {/* Optional Trust Badges Row */}
           {showTrustBadges && (
-            <div className="flex flex-wrap items-center justify-center gap-8 mt-14 pt-8 border-t border-white/10">
+            <div className="grid grid-cols-3 gap-6 pt-10 border-t border-white/10 max-w-2xl mx-auto">
               <div className="text-center">
-                <p className="font-display text-2xl text-gold">500+</p>
-                <p className="text-white/40 text-xs uppercase tracking-wider mt-0.5">
+                <p className="font-display text-2xl md:text-3xl text-gold mb-1">
+                  500+
+                </p>
+                <p className="text-[11px] md:text-xs text-white/50 uppercase tracking-widest">
                   Happy Families
                 </p>
               </div>
-              <div className="w-[1px] h-8 bg-white/10 hidden sm:block" />
               <div className="text-center">
-                <p className="font-display text-2xl text-gold">5.0 ★</p>
-                <p className="text-white/40 text-xs uppercase tracking-wider mt-0.5">
-                  Google Rating
+                <p className="font-display text-2xl md:text-3xl text-gold mb-1">
+                  5.0 ★
+                </p>
+                <p className="text-[11px] md:text-xs text-white/50 uppercase tracking-widest">
+                  Rating
                 </p>
               </div>
-              <div className="w-[1px] h-8 bg-white/10 hidden sm:block" />
               <div className="text-center">
-                <p className="font-display text-2xl text-gold">24/7</p>
-                <p className="text-white/40 text-xs uppercase tracking-wider mt-0.5">
+                <p className="font-display text-2xl md:text-3xl text-gold mb-1">
+                  24/7
+                </p>
+                <p className="text-[11px] md:text-xs text-white/50 uppercase tracking-widest">
                   Concierge Support
                 </p>
               </div>

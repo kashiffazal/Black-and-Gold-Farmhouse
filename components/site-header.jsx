@@ -7,7 +7,7 @@ import { ThemeToggle } from "./theme-toggle";
 import { useTheme } from "./theme-provider";
 import { GoldButton } from "./gold-button";
 import { Menu, X, Phone, Mail } from "lucide-react";
-import { Instagram, Facebook } from "./icons";
+import { Instagram, Facebook, TikTok } from "./icons";
 
 /**
  * SiteHeader — Fixed top navigation with:
@@ -82,20 +82,41 @@ export function SiteHeader() {
               info@blackgoldfarmhouse.com
             </a>
             <a
-              href="tel:+923001234567"
+              href="tel:+923332973045"
               className="flex items-center hover:text-gold transition-colors"
             >
-              <Phone className="w-3 h-3 mr-2 text-gold" /> +92 300 123 4567
+              <Phone className="w-3 h-3 mr-2 text-gold" /> +92 333 2973045
             </a>
           </div>
           {/* Right: socials + theme toggle */}
           <div className="flex items-center space-x-4">
             <span className="tracking-[0.25em] text-gold/70">FOLLOW US</span>
-            <a href="#" className="hover:text-gold transition-colors">
+            <a
+              href="https://www.instagram.com/blackgoldfarmofficial?igsh=MWk4Z2V1bmp3bzZ4&utm_source=qr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-gold transition-colors"
+              title="Instagram: @blackgoldfarmofficial"
+            >
               <Instagram className="w-4 h-4" />
             </a>
-            <a href="#" className="hover:text-gold transition-colors">
+            <a
+              href="https://facebook.com/blackgoldfarmofficial"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-gold transition-colors"
+              title="Facebook: @blackgoldfarmofficial"
+            >
               <Facebook className="w-4 h-4" />
+            </a>
+            <a
+              href="https://tiktok.com/@blackgoldfarmofficial"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-gold transition-colors"
+              title="TikTok: @blackgoldfarmofficial"
+            >
+              <TikTok className="w-4 h-4" />
             </a>
             <div className="w-[1px] h-4 bg-white/30 mx-2" />
             {/* ThemeToggle renders its own gold circular button */}
@@ -263,8 +284,8 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        {/* Book Now CTA at bottom */}
-        <div className="px-4 py-8">
+        {/* Book Now CTA + Social Links at bottom */}
+        <div className="px-4 py-8 space-y-6">
           <Link
             href="/book-now"
             onClick={() => setMobileMenuOpen(false)}
@@ -272,6 +293,36 @@ export function SiteHeader() {
           >
             Book Now
           </Link>
+
+          <div className="flex items-center justify-center gap-4 pt-2">
+            <a
+              href="https://www.instagram.com/blackgoldfarmofficial?igsh=MWk4Z2V1bmp3bzZ4&utm_source=qr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-9 h-9 rounded-full bg-gold/10 text-gold flex items-center justify-center hover:bg-gold hover:text-[#0a0704] transition-colors"
+              title="Instagram"
+            >
+              <Instagram className="w-4 h-4" />
+            </a>
+            <a
+              href="https://facebook.com/blackgoldfarmofficial"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-9 h-9 rounded-full bg-gold/10 text-gold flex items-center justify-center hover:bg-gold hover:text-[#0a0704] transition-colors"
+              title="Facebook"
+            >
+              <Facebook className="w-4 h-4" />
+            </a>
+            <a
+              href="https://tiktok.com/@blackgoldfarmofficial"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-9 h-9 rounded-full bg-gold/10 text-gold flex items-center justify-center hover:bg-gold hover:text-[#0a0704] transition-colors"
+              title="TikTok"
+            >
+              <TikTok className="w-4 h-4" />
+            </a>
+          </div>
         </div>
       </div>
     </header>

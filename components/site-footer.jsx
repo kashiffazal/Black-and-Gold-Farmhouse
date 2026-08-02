@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, Mail, MapPin, ArrowRight, Clock, ChevronRight } from "lucide-react";
-import { Instagram, Facebook } from "./icons";
+import { Instagram, Facebook, TikTok } from "./icons";
 import { GoldButton } from "./gold-button";
 
 /**
@@ -52,18 +52,34 @@ export function SiteFooter() {
             {/* Social icons */}
             <div className="flex space-x-3 pt-2">
               <a
-                href="#"
+                href="https://www.instagram.com/blackgoldfarmofficial?igsh=MWk4Z2V1bmp3bzZ4&utm_source=qr"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Instagram"
+                title="Instagram: @blackgoldfarmofficial"
                 className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/60 hover:bg-gold hover:text-[#0a0704] hover:border-gold transition-all duration-300"
               >
                 <Instagram className="w-4 h-4" />
               </a>
               <a
-                href="#"
+                href="https://facebook.com/blackgoldfarmofficial"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Facebook"
+                title="Facebook: @blackgoldfarmofficial"
                 className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/60 hover:bg-gold hover:text-[#0a0704] hover:border-gold transition-all duration-300"
               >
                 <Facebook className="w-4 h-4" />
+              </a>
+              <a
+                href="https://tiktok.com/@blackgoldfarmofficial"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TikTok"
+                title="TikTok: @blackgoldfarmofficial"
+                className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/60 hover:bg-gold hover:text-[#0a0704] hover:border-gold transition-all duration-300"
+              >
+                <TikTok className="w-4 h-4" />
               </a>
             </div>
           </div>
@@ -105,17 +121,27 @@ export function SiteFooter() {
                   <MapPin className="w-4 h-4" />
                 </div>
                 <div>
-                  <p className="text-white/80 font-medium">Malir, Karachi</p>
-                  <p className="text-white/40 text-xs mt-0.5">15 mins from Airport</p>
+                  <p className="text-white/80 font-medium text-xs leading-snug">
+                    Black Gold Farm, Goth Ghulam Mohammad Jokhio Goth, Gadap Town, Karachi, Pakistan
+                  </p>
+                  <p className="text-gold/70 text-[11px] mt-1">15 mins from Airport</p>
                 </div>
               </li>
-              <li className="flex items-center group">
-                <div className="w-9 h-9 rounded-full bg-gold/10 flex items-center justify-center text-gold mr-3 shrink-0 group-hover:bg-gold/20 transition-colors">
+              <li className="flex items-start group">
+                <div className="w-9 h-9 rounded-full bg-gold/10 flex items-center justify-center text-gold mr-3 shrink-0 group-hover:bg-gold/20 transition-colors mt-0.5">
                   <Phone className="w-4 h-4" />
                 </div>
-                <a href="tel:+923001234567" className="hover:text-gold transition-colors">
-                  +92 300 123 4567
-                </a>
+                <div className="space-y-0.5">
+                  <a href="tel:+923332973045" className="hover:text-gold transition-colors block text-xs">
+                    +92 333 2973045
+                  </a>
+                  <a href="tel:+923212181167" className="hover:text-gold transition-colors block text-xs">
+                    +92 321 2181167
+                  </a>
+                  <a href="tel:+923350754418" className="hover:text-gold transition-colors block text-xs">
+                    +92 335 0754418
+                  </a>
+                </div>
               </li>
               <li className="flex items-center group">
                 <div className="w-9 h-9 rounded-full bg-gold/10 flex items-center justify-center text-gold mr-3 shrink-0 group-hover:bg-gold/20 transition-colors">

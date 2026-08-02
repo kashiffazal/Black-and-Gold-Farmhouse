@@ -4,25 +4,24 @@ import React, { useState, useMemo } from "react";
 import { GalleryGrid } from "../../../components/gallery-lightbox";
 
 /**
- * GalleryWithFilterClient — Client component for interactive category filtering.
- *
- * Features:
- *  - Horizontal scrollable category tabs
- *  - Animated gold underline on active tab
- *  - Filtered image count display
- *  - Smooth transition when switching categories
- *  - Uses GalleryGrid (with lightbox) for rendering
+ * GalleryWithFilterClient — Client component for interactive category filtering (Photos & Videos).
  *
  * Props:
  *  categories — Array of category strings (first = "All")
- *  allImages  — Array of { src, alt, category }
+ *  allImages  — Array of { src, alt, category, type? }
  */
 export function GalleryWithFilterClient({ categories, allImages }) {
   const [activeCategory, setActiveCategory] = useState("All");
 
-  /* ── Filter images based on selected category ───────────────── */
+  /* ── Filter items based on selected category ───────────────── */
   const filteredImages = useMemo(() => {
     if (activeCategory === "All") return allImages;
+    if (activeCategory === "Videos 🎥") {
+      return allImages.filter((img) => img.type === "video");
+    }
+    if (activeCategory === "Photos 📸") {
+      return allImages.filter((img) => img.type !== "video");
+    }
     return allImages.filter((img) => img.category === activeCategory);
   }, [activeCategory, allImages]);
 
@@ -47,33 +46,18 @@ export function GalleryWithFilterClient({ categories, allImages }) {
           ))}
         </div>
 
-        {/* Image count */}
+        {/* Item count */}
         <p className="text-foreground/40 text-sm shrink-0">
           Showing{" "}
           <span className="text-gold font-semibold">
             {filteredImages.length}
           </span>{" "}
-          {filteredImages.length === 1 ? "image" : "images"}
+          {filteredImages.length === 1 ? "media item" : "media items"}
         </p>
       </div>
 
       {/* ── Gallery Grid with Lightbox ────────────────────────── */}
-      <div
-        key={activeCategory}
-        style={{ animation: "galleryFadeIn 0.4s ease-out" }}
-      >
-        <GalleryGrid images={filteredImages} />
-      </div>
-
-      {/* Fade-in animation for category switch */}
-      <style>{`
-        @keyframes galleryFadeIn {
-          from { opacity: 0; transform: translateY(8px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-      `}</style>
+      <GalleryGrid key={activeCategory} images={filteredImages} />
     </div>
   );
 }
