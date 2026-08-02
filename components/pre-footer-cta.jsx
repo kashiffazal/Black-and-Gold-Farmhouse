@@ -1,25 +1,15 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import { Star } from "lucide-react";
 import { Reveal } from "./reveal";
 import { GoldButton } from "./gold-button";
+import { useTheme } from "./theme-provider";
 
 /**
  * PreFooterCta — Reusable luxury pre-footer CTA section with background video.
- *
- * Props:
- * - tag: Small uppercase category text
- * - title: Heading main text
- * - highlightTitle: Highlighted italic gold gradient word
- * - titleAfter: Optional text after highlighted word
- * - description: Subtitle description paragraph
- * - primaryCtaLabel: Primary button text
- * - primaryCtaHref: Primary button link URL
- * - secondaryCtaLabel: Secondary button text
- * - secondaryCtaHref: Secondary button link URL
- * - bgImage: Background image fallback
- * - bgVideo: Background video path (default: /videos/v10.mp4, muted, loop, autoplay)
- * - showTrustBadges: Boolean to show trust stats row
+ * Adapts dynamically to Light and Dark themes.
  */
 export function PreFooterCta({
   tag = "Your Escape Awaits",
@@ -35,9 +25,12 @@ export function PreFooterCta({
   bgVideo = "/videos/v10.mp4",
   showTrustBadges = true,
 }) {
+  const { theme } = useTheme();
+  const isLight = theme === "light";
+
   return (
     <section className="relative py-28 md:py-36 flex items-center justify-center overflow-hidden border-t border-border/40">
-      {/* Background Video (v10.mp4 without audio) & Dark Overlay */}
+      {/* Background Video & Dynamic Theme Overlays */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         {bgVideo ? (
           <video
@@ -56,11 +49,22 @@ export function PreFooterCta({
             className="object-cover"
           />
         )}
-        <div className="absolute inset-0 bg-black/75 z-10" />
+
+        {isLight ? (
+          <>
+            <div className="absolute inset-0 bg-white/80 backdrop-blur-[2px] z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-white/45 via-white/80 to-white/20 z-10" />
+          </>
+        ) : (
+          <>
+            <div className="absolute inset-0 bg-black/75 z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/60 z-10" />
+          </>
+        )}
       </div>
 
       {/* Floating Starfield Particles */}
-      <div className="absolute inset-0 stars-bg opacity-35 pointer-events-none z-10" />
+      <div className="absolute inset-0 stars-bg opacity-30 pointer-events-none z-10" />
 
       <Reveal>
         <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
@@ -76,8 +80,12 @@ export function PreFooterCta({
             {tag}
           </p>
 
-          {/* Main Title with Highlight Word */}
-          <h2 className="font-display text-4xl sm:text-6xl md:text-7xl text-white leading-tight mb-6">
+          {/* Main Title */}
+          <h2
+            className={`font-display text-4xl sm:text-6xl md:text-7xl leading-tight mb-6 ${
+              isLight ? "text-slate-900" : "text-white"
+            }`}
+          >
             {title}{" "}
             <span className="italic gold-gradient font-light">
               {highlightTitle}
@@ -85,8 +93,12 @@ export function PreFooterCta({
             {titleAfter}
           </h2>
 
-          {/* Description */}
-          <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+          {/* Subtitle Description */}
+          <p
+            className={`text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-light ${
+              isLight ? "text-slate-700" : "text-white/70"
+            }`}
+          >
             {description}
           </p>
 
@@ -100,43 +112,39 @@ export function PreFooterCta({
             >
               {primaryCtaLabel}
             </GoldButton>
-
-            <GoldButton
-              href={secondaryCtaHref}
-              variant="outline"
-              className="w-full sm:w-auto px-8 py-4"
-            >
-              {secondaryCtaLabel}
-            </GoldButton>
+            {secondaryCtaLabel && (
+              <GoldButton
+                href={secondaryCtaHref}
+                variant="outline"
+                className="w-full sm:w-auto px-8 py-4"
+              >
+                {secondaryCtaLabel}
+              </GoldButton>
+            )}
           </div>
 
-          {/* Optional Trust Badges Row */}
+          {/* Trust Badges Row */}
           {showTrustBadges && (
-            <div className="grid grid-cols-3 gap-6 pt-10 border-t border-white/10 max-w-2xl mx-auto">
-              <div className="text-center">
-                <p className="font-display text-2xl md:text-3xl text-gold mb-1">
-                  500+
-                </p>
-                <p className="text-[11px] md:text-xs text-white/50 uppercase tracking-widest">
-                  Happy Families
-                </p>
-              </div>
-              <div className="text-center">
-                <p className="font-display text-2xl md:text-3xl text-gold mb-1">
-                  5.0 ★
-                </p>
-                <p className="text-[11px] md:text-xs text-white/50 uppercase tracking-widest">
-                  Rating
-                </p>
-              </div>
-              <div className="text-center">
-                <p className="font-display text-2xl md:text-3xl text-gold mb-1">
-                  24/7
-                </p>
-                <p className="text-[11px] md:text-xs text-white/50 uppercase tracking-widest">
-                  Concierge Support
-                </p>
-              </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-10 border-t border-gold/20 max-w-3xl mx-auto">
+              {[
+                { label: "100% Private Estate", value: "Exclusive Access" },
+                { label: "Generator Backup", value: "24/7 Power Included" },
+                { label: "Pristine Pools", value: "Deep Cleaned" },
+                { label: "Distance", value: "15 Mins Airport" },
+              ].map((badge, idx) => (
+                <div key={idx} className="text-center">
+                  <p className="text-gold font-display text-base md:text-lg font-bold">
+                    {badge.value}
+                  </p>
+                  <p
+                    className={`text-[11px] uppercase tracking-wider mt-1 ${
+                      isLight ? "text-slate-600 font-medium" : "text-white/50"
+                    }`}
+                  >
+                    {badge.label}
+                  </p>
+                </div>
+              ))}
             </div>
           )}
         </div>

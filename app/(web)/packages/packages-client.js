@@ -6,6 +6,10 @@ import { GoldButton } from "../../../components/gold-button";
 
 /**
  * PackagesFilterClient — Client component for filtering Black Gold Farmhouse packages & viewing the comparison matrix.
+ *
+ * Fixes applied:
+ *  - Featured dark beam-border cards have explicit text-white colors so text is crisp in both Light & Dark modes.
+ *  - Category tabs wrap cleanly without unwanted scrollbars.
  */
 export function PackagesFilterClient({ tenHourPackages, twentyTwoHourPackages, eventPackages, comparisonFeatures }) {
   const [activeTab, setActiveTab] = useState("22h"); // '22h' | '10h' | 'events'
@@ -162,10 +166,10 @@ function PackageCard({ pkg }) {
 
   return (
     <div
-      className={`flex flex-col relative rounded-md transition-all duration-500 ${
+      className={`flex flex-col relative rounded-lg transition-all duration-500 ${
         isFeatured
-          ? "beam-border p-8 md:p-10 shadow-[0_40px_100px_-40px_rgba(200,160,80,0.3)]"
-          : "bg-card border border-border p-8 md:p-10 aura-box hover:border-gold/40 shadow-sm hover:shadow-xl"
+          ? "beam-border p-8 md:p-10 shadow-[0_40px_100px_-40px_rgba(200,160,80,0.3)] bg-[#0d0905] text-white"
+          : "bg-card border border-border p-8 md:p-10 aura-box hover:border-gold/40 shadow-sm hover:shadow-xl text-foreground"
       }`}
     >
       {isFeatured && (
@@ -174,27 +178,47 @@ function PackageCard({ pkg }) {
         </div>
       )}
 
-      <h3 className="font-display text-2xl md:text-3xl text-foreground dark:text-white mb-1">
+      <h3
+        className={`font-display text-2xl md:text-3xl mb-1 ${
+          isFeatured ? "text-white" : "text-foreground"
+        }`}
+      >
         {pkg.title}
       </h3>
-      <p className="text-gold/80 text-xs font-semibold uppercase tracking-wider mb-6">
+      <p className="text-gold font-semibold uppercase tracking-wider text-xs mb-6">
         {pkg.timing}
       </p>
 
-      <div className="mb-6 pb-6 border-b border-border/60">
-        <span className="text-3xl sm:text-4xl font-display text-gold">
+      <div
+        className={`mb-6 pb-6 border-b ${
+          isFeatured ? "border-white/15" : "border-border/60"
+        }`}
+      >
+        <span className="text-3xl sm:text-4xl font-display text-gold font-bold">
           {pkg.price}
         </span>
-        <span className="text-foreground/50 dark:text-white/50 text-xs block mt-1">
+        <span
+          className={`text-xs block mt-1 ${
+            isFeatured ? "text-white/60" : "text-foreground/60"
+          }`}
+        >
           {pkg.acInfo}
         </span>
       </div>
 
-      <p className="text-foreground/70 dark:text-white/70 text-sm mb-6 leading-relaxed">
+      <p
+        className={`text-sm mb-6 leading-relaxed font-light ${
+          isFeatured ? "text-white/80" : "text-foreground/75"
+        }`}
+      >
         {pkg.desc}
       </p>
 
-      <ul className="space-y-3 mb-8 text-xs sm:text-sm text-foreground/80 dark:text-white/80 flex-grow">
+      <ul
+        className={`space-y-3 mb-8 text-xs sm:text-sm flex-grow ${
+          isFeatured ? "text-white/90 font-light" : "text-foreground/80"
+        }`}
+      >
         {pkg.features.map((feat, fIdx) => (
           <li key={fIdx} className="flex items-start">
             <Check className="w-4 h-4 text-gold mr-2.5 shrink-0 mt-0.5" />

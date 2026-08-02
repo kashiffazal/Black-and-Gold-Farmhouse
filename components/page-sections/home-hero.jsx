@@ -7,6 +7,7 @@ import { useTheme } from "../theme-provider";
 
 /**
  * HomeHero — Full-screen Hero with Video Background (/videos/v10.mp4) & Cycling Text Content.
+ * Responsive & optimized for BOTH Light and Dark themes.
  */
 
 // ── Text Slide Data ────────────────────────────────────────────────────────
@@ -48,6 +49,8 @@ export default function HomeHero() {
   const { theme } = useTheme();
   const pausedRef = useRef(false);
   const timerRef = useRef(null);
+
+  const isLight = theme === "light";
 
   /* ── Navigate to a specific slide ──────────────────────────────────── */
   function goTo(index) {
@@ -91,7 +94,7 @@ export default function HomeHero() {
         pausedRef.current = false;
       }}
     >
-      {/* ── Background Video Layer (v10.mp4 without audio) ──────────── */}
+      {/* ── Background Video Layer (v10.mp4) ───────────────────────── */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <video
           src="/videos/v10.mp4"
@@ -101,10 +104,23 @@ export default function HomeHero() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover scale-105"
         />
-        {/* Gradient overlays for contrast & readability */}
-        <div className="absolute inset-0 bg-black/65 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/50 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent z-10" />
+
+        {/* Dynamic Overlays: Dark Mode vs Light Mode */}
+        {isLight ? (
+          <>
+            {/* Bright Light Luxury Overlay for Light Mode */}
+            <div className="absolute inset-0 bg-white/75 backdrop-blur-[2px] z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-white/10 to-white/80 z-10" />
+            <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent z-10" />
+          </>
+        ) : (
+          <>
+            {/* Deep Dark Luxury Overlay for Dark Mode */}
+            <div className="absolute inset-0 bg-black/65 z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-black/10 to-black/80 z-10" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent z-10" />
+          </>
+        )}
       </div>
 
       {/* ── Slide Content (vertically centered, clears fixed header) ── */}
@@ -117,10 +133,12 @@ export default function HomeHero() {
           {slide.tag}
         </p>
 
-        {/* Main heading */}
+        {/* Main heading: text-foreground on Light mode, text-white on Dark mode */}
         <h1
           key={`h1-${current}`}
-          className="font-display text-5xl sm:text-7xl md:text-8xl text-white leading-[1.05] mb-8 font-medium animate-[fadeSlideUp_0.8s_ease-out_0.1s_forwards] opacity-0"
+          className={`font-display text-5xl sm:text-7xl md:text-8xl leading-[1.05] mb-8 font-medium animate-[fadeSlideUp_0.8s_ease-out_0.1s_forwards] opacity-0 ${
+            isLight ? "text-slate-900" : "text-white"
+          }`}
         >
           {slide.line1}{" "}
           <span className="gold-gradient italic pr-2">{slide.accent}</span>
@@ -128,10 +146,12 @@ export default function HomeHero() {
           <span className="italic">{slide.line2}</span>
         </h1>
 
-        {/* Subtitle */}
+        {/* Subtitle description */}
         <p
           key={`sub-${current}`}
-          className="text-white/80 text-base md:text-lg max-w-2xl mx-auto mb-12 animate-[fadeSlideUp_0.8s_ease-out_0.25s_forwards] opacity-0 font-light leading-relaxed"
+          className={`text-base md:text-lg max-w-2xl mx-auto mb-12 animate-[fadeSlideUp_0.8s_ease-out_0.25s_forwards] opacity-0 font-light leading-relaxed ${
+            isLight ? "text-slate-700" : "text-white/80"
+          }`}
         >
           {slide.sub}
         </p>
@@ -151,14 +171,18 @@ export default function HomeHero() {
       <button
         onClick={goPrev}
         aria-label="Previous slide"
-        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full border border-gold/50 text-gold flex items-center justify-center hover:bg-gold/10 hover:border-gold transition-all duration-300 backdrop-blur-sm"
+        className={`absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full border border-gold/50 text-gold flex items-center justify-center hover:bg-gold/10 hover:border-gold transition-all duration-300 backdrop-blur-sm ${
+          isLight ? "bg-white/40 shadow-md" : "bg-black/20"
+        }`}
       >
         <ChevronLeft className="w-5 h-5" />
       </button>
       <button
         onClick={goNext}
         aria-label="Next slide"
-        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full border border-gold/50 text-gold flex items-center justify-center hover:bg-gold/10 hover:border-gold transition-all duration-300 backdrop-blur-sm"
+        className={`absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full border border-gold/50 text-gold flex items-center justify-center hover:bg-gold/10 hover:border-gold transition-all duration-300 backdrop-blur-sm ${
+          isLight ? "bg-white/40 shadow-md" : "bg-black/20"
+        }`}
       >
         <ChevronRight className="w-5 h-5" />
       </button>
@@ -173,7 +197,11 @@ export default function HomeHero() {
               aria-label={`Go to slide ${idx + 1}`}
             >
               {idx === current ? (
-                <span className="relative flex w-10 h-1.5 rounded-full bg-white/20 overflow-hidden">
+                <span
+                  className={`relative flex w-10 h-1.5 rounded-full overflow-hidden ${
+                    isLight ? "bg-black/20" : "bg-white/20"
+                  }`}
+                >
                   <span
                     key={current}
                     className="absolute left-0 top-0 h-full bg-gold rounded-full"
@@ -183,12 +211,20 @@ export default function HomeHero() {
                   />
                 </span>
               ) : (
-                <span className="block w-2 h-2 rounded-full bg-white/30 hover:bg-gold/60 transition-colors" />
+                <span
+                  className={`block w-2 h-2 rounded-full hover:bg-gold/60 transition-colors ${
+                    isLight ? "bg-black/30" : "bg-white/30"
+                  }`}
+                />
               )}
             </button>
           ))}
         </div>
-        <p className="text-white/30 text-[10px] tracking-[0.35em] uppercase select-none">
+        <p
+          className={`text-[10px] tracking-[0.35em] uppercase select-none ${
+            isLight ? "text-slate-600 font-semibold" : "text-white/40"
+          }`}
+        >
           0{current + 1} / 0{SLIDES.length}
         </p>
       </div>

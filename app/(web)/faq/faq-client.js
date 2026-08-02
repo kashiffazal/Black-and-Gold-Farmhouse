@@ -49,7 +49,7 @@ export function FAQClientView({ faqCategories }) {
   return (
     <div>
       {/* ── Search Bar & Category Filter Pills ─────────────────────── */}
-      <div className="max-w-3xl mx-auto mb-12 space-y-6">
+      <div className="max-w-4xl mx-auto mb-12 space-y-6">
         {/* Real-Time Search Bar */}
         <div className="relative">
           <input
@@ -70,8 +70,8 @@ export function FAQClientView({ faqCategories }) {
           )}
         </div>
 
-        {/* Category Pills */}
-        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide justify-start sm:justify-center">
+        {/* Category Pills (Wrapping without scrollbar) */}
+        <div className="flex flex-wrap items-center justify-center gap-2.5">
           {categoryNames.map((cat) => (
             <button
               key={cat}
