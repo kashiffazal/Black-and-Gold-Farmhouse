@@ -6,10 +6,11 @@ import Image from "next/image";
 import { X, ChevronLeft, ChevronRight, Play, Film } from "lucide-react";
 
 /**
- * GalleryGrid — Responsive media grid with full-screen Lightbox supporting both Photos and Videos.
+ * GalleryGrid — Responsive media grid with full-screen Lightbox supporting Photos & Videos.
  *
- * Props:
- *  images — Array of { src, alt, category?, type?: 'image' | 'video', poster?, videoSrc? }
+ * Video Thumbnail Fix:
+ *  - Appends #t=0.1 & preload="metadata" to video URLs to force browser first-frame thumbnail decoding.
+ *  - Renders play button overlay & video badge.
  */
 export function GalleryGrid({ images }) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -60,6 +61,12 @@ export function GalleryGrid({ images }) {
     item?.isVideo ||
     (typeof item?.src === "string" && item.src.endsWith(".mp4"));
 
+  // Helper to format video URL with #t=0.1 thumbnail frame parameter
+  const getVideoSrc = (url) => {
+    if (!url) return "";
+    return url.includes("#") ? url : `${url}#t=0.1`;
+  };
+
   /* ── Lightbox JSX (rendered via Portal on document.body) ────────── */
   const lightboxContent =
     lightboxOpen && portalReady
@@ -71,7 +78,7 @@ export function GalleryGrid({ images }) {
               if (e.target === e.currentTarget) closeLightbox();
             }}
           >
-            {/* ── Close button (top-right) ────────────────────────────── */}
+            {/* Close button */}
             <button
               onClick={closeLightbox}
               className="absolute top-4 right-4 md:top-6 md:right-6 z-50 w-11 h-11 rounded-full bg-white/10 hover:bg-gold hover:text-[#0a0704] flex items-center justify-center text-white transition-all cursor-pointer"
@@ -80,7 +87,7 @@ export function GalleryGrid({ images }) {
               <X className="w-5 h-5" />
             </button>
 
-            {/* ── Previous arrow ──────────────────────────────────────── */}
+            {/* Previous arrow */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -92,7 +99,7 @@ export function GalleryGrid({ images }) {
               <ChevronLeft className="w-6 h-6" />
             </button>
 
-            {/* ── Next arrow ─────────────────────────────────────────── */}
+            {/* Next arrow */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -104,7 +111,7 @@ export function GalleryGrid({ images }) {
               <ChevronRight className="w-6 h-6" />
             </button>
 
-            {/* ── Main media container ───────────────────────────────── */}
+            {/* Main media container */}
             <div className="relative w-[88vw] md:w-[72vw] h-[55vh] md:h-[65vh] flex items-center justify-center mt-14">
               {isVideoItem(active) ? (
                 <video
@@ -130,12 +137,12 @@ export function GalleryGrid({ images }) {
               )}
             </div>
 
-            {/* ── Caption + slide counter ────────────────────────────── */}
+            {/* Caption & Counter */}
             <div className="text-center mt-5 mb-4 px-4">
               <p className="text-white font-display text-lg md:text-xl flex items-center justify-center gap-2">
                 {isVideoItem(active) && (
-                  <span className="inline-flex items-center gap-1 text-xs uppercase tracking-wider bg-gold/20 text-gold px-2 py-0.5 rounded font-sans">
-                    <Film className="w-3.5 h-3.5" /> Video
+                  <span className="inline-flex items-center gap-1 text-xs uppercase tracking-wider bg-gold/20 text-gold px-2 py-0.5 rounded font-sans font-semibold">
+                    <Film className="w-3.5 h-3.5" /> Video Walkthrough
                   </span>
                 )}
                 {active.alt}
@@ -146,7 +153,7 @@ export function GalleryGrid({ images }) {
               </p>
             </div>
 
-            {/* ── Thumbnail strip ────────────────────────────────────── */}
+            {/* Thumbnail strip */}
             <div className="flex gap-2 px-4 overflow-x-auto max-w-[90vw] pb-3 scrollbar-hide">
               {images.map((img, idx) => (
                 <button
@@ -162,11 +169,13 @@ export function GalleryGrid({ images }) {
                   }`}
                 >
                   {isVideoItem(img) ? (
-                    <div className="w-full h-full bg-black/80 flex items-center justify-center relative">
+                    <div className="w-full h-full bg-black flex items-center justify-center relative">
                       <video
-                        src={img.videoSrc || img.src}
-                        className="w-full h-full object-cover opacity-60"
+                        src={getVideoSrc(img.videoSrc || img.src)}
+                        preload="metadata"
+                        className="w-full h-full object-cover opacity-70"
                         muted
+                        playsInline
                       />
                       <Play className="w-4 h-4 text-gold absolute" />
                     </div>
@@ -183,7 +192,7 @@ export function GalleryGrid({ images }) {
               ))}
             </div>
 
-            {/* ── Gold progress bar ──────────────────────────────────── */}
+            {/* Gold progress bar */}
             <div className="w-[88vw] md:w-[72vw] h-0.5 bg-white/10 rounded-full overflow-hidden mb-4">
               <div
                 className="h-full bg-gold rounded-full transition-all duration-300"
@@ -203,6 +212,8 @@ export function GalleryGrid({ images }) {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[200px] md:auto-rows-[250px]">
         {images.map((img, idx) => {
           const isVid = isVideoItem(img);
+          const videoUrl = getVideoSrc(img.videoSrc || img.src);
+
           return (
             <div
               key={idx}
@@ -214,9 +225,9 @@ export function GalleryGrid({ images }) {
               {isVid ? (
                 <div className="relative w-full h-full bg-[#0a0704] overflow-hidden">
                   <video
-                    src={img.videoSrc || img.src}
+                    src={videoUrl}
+                    preload="metadata"
                     muted
-                    loop
                     playsInline
                     className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
                   />
@@ -292,10 +303,118 @@ export function GalleryGrid({ images }) {
           from { opacity: 0; transform: scale(0.97); }
           to { opacity: 1; transform: scale(1); }
         }
-        /* Hide scrollbar on thumbnail strip */
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
+    </>
+  );
+}
+
+/**
+ * VideoShowcaseModal — Home Page Video Reel component playing 1 video at a time in a pop-up modal.
+ */
+export function VideoShowcaseModal({ videos }) {
+  const [activeVideo, setActiveVideo] = useState(null);
+  const [portalReady, setPortalReady] = useState(false);
+
+  useEffect(() => {
+    setPortalReady(true);
+  }, []);
+
+  function openVideo(v) {
+    setActiveVideo(v);
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeVideo() {
+    setActiveVideo(null);
+    document.body.style.overflow = "";
+  }
+
+  const modalContent =
+    activeVideo && portalReady
+      ? createPortal(
+          <div
+            className="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-md flex flex-col items-center justify-center p-4"
+            onClick={(e) => {
+              if (e.target === e.currentTarget) closeVideo();
+            }}
+            style={{ animation: "galleryFadeIn 0.25s ease-out" }}
+          >
+            {/* Close button */}
+            <button
+              onClick={closeVideo}
+              className="absolute top-4 right-4 md:top-6 md:right-6 z-50 w-11 h-11 rounded-full bg-white/10 hover:bg-gold hover:text-[#0a0704] flex items-center justify-center text-white transition-all cursor-pointer"
+              aria-label="Close video pop-up"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Popup Video Player */}
+            <div className="relative w-full max-w-4xl h-[60vh] md:h-[70vh] flex flex-col items-center justify-center">
+              <video
+                src={activeVideo.video}
+                controls
+                autoPlay
+                playsInline
+                className="w-full h-full object-contain rounded-lg shadow-2xl"
+              />
+              <div className="mt-4 text-center">
+                <h4 className="font-display text-xl text-white mb-1">
+                  {activeVideo.title}
+                </h4>
+                <p className="text-gold/80 text-xs uppercase tracking-widest">
+                  {activeVideo.desc}
+                </p>
+              </div>
+            </div>
+          </div>,
+          document.body
+        )
+      : null;
+
+  return (
+    <>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {videos.map((v, idx) => (
+          <div
+            key={idx}
+            onClick={() => openVideo(v)}
+            className="bg-card border border-border/80 hover:border-gold/50 rounded-xl overflow-hidden shadow-xl group aura-box cursor-pointer transition-all duration-300 hover:-translate-y-1"
+          >
+            {/* Video Thumbnail Frame with Play Button */}
+            <div className="relative aspect-[16/10] bg-[#0a0704] overflow-hidden">
+              <video
+                src={`${v.video}#t=0.1`}
+                preload="metadata"
+                muted
+                playsInline
+                className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
+              />
+
+              {/* Central Play Badge */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-14 h-14 rounded-full bg-gold/90 text-[#0a0704] flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-gold transition-all duration-300">
+                  <Play className="w-6 h-6 fill-current ml-0.5" />
+                </div>
+              </div>
+
+              <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-sm text-gold border border-gold/40 text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded flex items-center gap-1">
+                <Film className="w-3 h-3" /> Pop-up Video
+              </div>
+            </div>
+
+            <div className="p-5">
+              <h4 className="font-display text-lg text-foreground mb-1 group-hover:text-gold transition-colors">
+                {v.title}
+              </h4>
+              <p className="text-foreground/60 text-xs font-light">{v.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {modalContent}
     </>
   );
 }

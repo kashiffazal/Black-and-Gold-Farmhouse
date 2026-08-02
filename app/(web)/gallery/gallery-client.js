@@ -6,9 +6,9 @@ import { GalleryGrid } from "../../../components/gallery-lightbox";
 /**
  * GalleryWithFilterClient — Client component for interactive category filtering (Photos & Videos).
  *
- * Props:
- *  categories — Array of category strings (first = "All")
- *  allImages  — Array of { src, alt, category, type? }
+ * Fixes applied:
+ *  - Responsive flex container with constrained min-w-0 for scrolling filter tabs.
+ *  - Separate item count badge so tabs NEVER overlap the text.
  */
 export function GalleryWithFilterClient({ categories, allImages }) {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -27,10 +27,10 @@ export function GalleryWithFilterClient({ categories, allImages }) {
 
   return (
     <div>
-      {/* ── Category Filter Tabs ──────────────────────────────── */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-6">
-        {/* Scrollable filter tabs */}
-        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+      {/* ── Category Filter Tabs Bar ──────────────────────────── */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-10 gap-4 pb-4 border-b border-border/50">
+        {/* Scrollable filter tabs with constrained flex box */}
+        <div className="flex-1 min-w-0 flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
           {categories.map((cat) => (
             <button
               key={cat}
@@ -46,14 +46,14 @@ export function GalleryWithFilterClient({ categories, allImages }) {
           ))}
         </div>
 
-        {/* Item count */}
-        <p className="text-foreground/40 text-sm shrink-0">
-          Showing{" "}
-          <span className="text-gold font-semibold">
+        {/* Item count badge (isolated cleanly) */}
+        <div className="shrink-0 flex items-center gap-2 text-xs uppercase tracking-wider text-foreground/60 bg-card border border-border px-4 py-2.5 rounded-md self-start lg:self-auto">
+          <span>Showing</span>
+          <span className="text-gold font-bold text-sm">
             {filteredImages.length}
-          </span>{" "}
-          {filteredImages.length === 1 ? "media item" : "media items"}
-        </p>
+          </span>
+          <span>{filteredImages.length === 1 ? "media item" : "media items"}</span>
+        </div>
       </div>
 
       {/* ── Gallery Grid with Lightbox ────────────────────────── */}

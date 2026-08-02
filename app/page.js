@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Check, ChevronRight, Star, Phone, Mail, Play, Film } from "lucide-react";
 import { Reveal } from "../components/reveal";
 import { GoldButton } from "../components/gold-button";
-import { GalleryGrid } from "../components/gallery-lightbox";
+import { GalleryGrid, VideoShowcaseModal } from "../components/gallery-lightbox";
 import { PreFooterCta } from "../components/pre-footer-cta";
 import HomeHero from "../components/page-sections/home-hero";
 
@@ -476,7 +476,7 @@ export default function Home() {
                   Experience Black Gold in Motion
                 </h2>
                 <p className="text-foreground/60 mt-3 text-sm max-w-md">
-                  Watch authentic video walkthroughs of our swimming pool, snooker lounge, and lawns.
+                  Click any video thumbnail to play in a full-screen pop-up modal player.
                 </p>
               </div>
               <Link
@@ -488,44 +488,27 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                title: "Pool & Wall Fountain Ambiance",
-                desc: "Night illuminated pool reflection and wall fountain",
-                video: "/videos/v2.mp4",
-              },
-              {
-                title: "Expansive Green Lawns & Facade",
-                desc: "Daylight estate walkthrough & palm trees",
-                video: "/videos/v3.mp4",
-              },
-              {
-                title: "AC Snooker & Games Lounge",
-                desc: "Indoor snooker table and gaming atmosphere",
-                video: "/videos/v5.mp4",
-              },
-            ].map((v, idx) => (
-              <Reveal key={idx} delay={idx * 150}>
-                <div className="bg-card border border-border rounded-lg overflow-hidden shadow-lg group aura-box">
-                  <div className="relative aspect-[16/10] bg-black">
-                    <video
-                      src={v.video}
-                      controls
-                      preload="metadata"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="p-5">
-                    <h4 className="font-display text-lg text-foreground mb-1">
-                      {v.title}
-                    </h4>
-                    <p className="text-foreground/60 text-xs">{v.desc}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal delay={150}>
+            <VideoShowcaseModal
+              videos={[
+                {
+                  title: "Pool & Wall Fountain Ambiance",
+                  desc: "Night illuminated pool reflection and wall fountain",
+                  video: "/videos/v2.mp4",
+                },
+                {
+                  title: "Expansive Green Lawns & Facade",
+                  desc: "Daylight estate walkthrough & palm trees",
+                  video: "/videos/v3.mp4",
+                },
+                {
+                  title: "AC Snooker & Games Lounge",
+                  desc: "Indoor snooker table and gaming atmosphere",
+                  video: "/videos/v5.mp4",
+                },
+              ]}
+            />
+          </Reveal>
         </div>
       </section>
 

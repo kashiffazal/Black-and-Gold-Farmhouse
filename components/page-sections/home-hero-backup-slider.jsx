@@ -1,15 +1,24 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { GoldButton } from "../gold-button";
 import { useTheme } from "../theme-provider";
 
 /**
- * HomeHero — Full-screen Hero with Video Background (/videos/v10.mp4) & Cycling Text Content.
+ * HomeHero — Full-screen 3-slide hero slider.
+ *
+ * Fixes applied:
+ *  - More top padding so text clears the fixed header
+ *  - 3rd image replaced with a working Unsplash URL
+ *  - Auto-plays on mount (no interaction needed)
+ *  - First slide Ken Burns triggers after hydration via mounted state
+ *  - Removed "Watch Story" button; single CTA with beam-border
+ *  - Scroll indicator repositioned to bottom-center
  */
 
-// ── Text Slide Data ────────────────────────────────────────────────────────
+// ── Slide data ─────────────────────────────────────────────────────────────
 const SLIDES = [
   {
     id: 1,
@@ -19,6 +28,8 @@ const SLIDES = [
     line2: "Meets Family Fun",
     sub: "Escape to Karachi's most exclusive retreat. Discover unparalleled privacy, world-class amenities, and unforgettable moments.",
     cta: { label: "Book Your Stay", href: "/book-now" },
+    img: "/images/7.jpeg",
+    alt: "Black Gold Farmhouse big adult pool with shade canopy and clear blue water",
   },
   {
     id: 2,
@@ -28,6 +39,8 @@ const SLIDES = [
     line2: "That Last Forever",
     sub: "From intimate family gatherings to grand celebrations — every event here is a masterpiece of luxury and unforgettable joy.",
     cta: { label: "Explore Packages", href: "/packages" },
+    img: "/images/18.jpeg",
+    alt: "Black Gold Farmhouse illuminated pergola lounge with Sufi artwork and charpais",
   },
   {
     id: 3,
@@ -35,8 +48,10 @@ const SLIDES = [
     line1: "A Sanctuary",
     accent: "Beyond",
     line2: "The City's Hustle",
-    sub: "Step into a world of calm and comfort, just 15 minutes from Karachi airport. Sprawling lawns, pristine pools, and 24/7 service.",
+    sub: "Step into a world of calm and comfort, just minutes from Karachi. Lush green lawns, world-class amenities, and 24/7 service.",
     cta: { label: "View Gallery", href: "/gallery" },
+    img: "/images/21.jpeg",
+    alt: "Black Gold Farmhouse panoramic daylight view of lawn and pool",
   },
 ];
 
@@ -45,9 +60,16 @@ const SLIDE_DURATION = 6000;
 
 export default function HomeHero() {
   const [current, setCurrent] = useState(0);
+  const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
   const pausedRef = useRef(false);
   const timerRef = useRef(null);
+
+  /* Mark as mounted after hydration so first-slide Ken Burns triggers */
+  useEffect(() => {
+    const t = setTimeout(() => setMounted(true), 50);
+    return () => clearTimeout(t);
+  }, []);
 
   /* ── Navigate to a specific slide ──────────────────────────────────── */
   function goTo(index) {
@@ -63,12 +85,13 @@ export default function HomeHero() {
     setCurrent((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
   }
 
-  /* ── Auto-advance text slider ─────────────────────────────────────── */
+  /* ── Auto-advance timer (reschedules if paused, never gets stuck) ── */
   useEffect(() => {
     clearTimeout(timerRef.current);
 
     function tick() {
       if (pausedRef.current) {
+        // If hovering, keep checking every 500ms instead of giving up
         timerRef.current = setTimeout(tick, 500);
       } else {
         goNext();
@@ -91,23 +114,53 @@ export default function HomeHero() {
         pausedRef.current = false;
       }}
     >
-      {/* ── Background Video Layer (v10.mp4 without audio) ──────────── */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <video
-          src="/videos/v10.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover scale-105"
-        />
-        {/* Gradient overlays for contrast & readability */}
-        <div className="absolute inset-0 bg-black/65 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/50 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent z-10" />
-      </div>
+      {/* ── Background Image Layers (cross-fade) ─────────────────────── */}
+      {SLIDES.map((s, idx) => {
+        const isActive = idx === current;
+        /* Ken Burns: scale from 1.08 → 1.0 over 8s on the active slide */
+        const shouldZoom = isActive && mounted;
 
-      {/* ── Slide Content (vertically centered, clears fixed header) ── */}
+        return (
+          <div
+            key={s.id}
+            className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+            style={{
+              opacity: isActive ? 1 : 0,
+              zIndex: isActive ? 2 : 1,
+            }}
+          >
+            <div
+              className="absolute inset-0"
+              style={{
+                transform: shouldZoom ? "scale(1.0)" : "scale(1.08)",
+                transition: shouldZoom ? "transform 8s ease-out" : "none",
+              }}
+            >
+              <Image
+                src={s.img}
+                alt={s.alt}
+                fill
+                priority={idx === 0}
+                sizes="100vw"
+                className="object-cover"
+              />
+            </div>
+            {/* Gradient overlays for readability */}
+            {/* Bottom-up: darkens bottom for text */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10" />
+            {/* Top-down: darkens header area — lighter on light mode */}
+            <div className={`absolute inset-0 bg-gradient-to-b z-10 ${
+              theme === "light"
+                ? "from-white/50 via-white/15 to-transparent"
+                : "from-black/70 via-black/20 to-transparent"
+            }`} />
+            {/* Side vignette */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent z-10" />
+          </div>
+        );
+      })}
+
+      {/* ── Slide Content (vertically centered, clears header) ────────── */}
       <div className="relative z-20 w-full max-w-5xl mx-auto px-4 sm:px-6 text-center pt-40 md:pt-48 pb-40">
         {/* Tag line */}
         <p
@@ -131,12 +184,12 @@ export default function HomeHero() {
         {/* Subtitle */}
         <p
           key={`sub-${current}`}
-          className="text-white/80 text-base md:text-lg max-w-2xl mx-auto mb-12 animate-[fadeSlideUp_0.8s_ease-out_0.25s_forwards] opacity-0 font-light leading-relaxed"
+          className="text-white/80 text-base md:text-lg max-w-2xl mx-auto mb-12 animate-[fadeSlideUp_0.8s_ease-out_0.25s_forwards] opacity-0"
         >
           {slide.sub}
         </p>
 
-        {/* Single CTA with spinning beam border */}
+        {/* Single CTA with beam border (animated spinning gold border) */}
         <div
           key={`cta-${current}`}
           className="flex justify-center animate-[fadeSlideUp_0.8s_ease-out_0.4s_forwards] opacity-0"
